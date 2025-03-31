@@ -1,3 +1,3 @@
 module.exports = {
-    TestService: require("./test-service"),
+    BookingService: require("./booking-service"),
 }
