@@ -1,9 +1,6 @@
 const router = require('express').Router();
-const { BookingController } = require('../../controllers');
+const bookingRoutes = require('./booking');
 
-// Booking routes
-
-
-
+router.use('/bookings', bookingRoutes);
 
 module.exports = router;

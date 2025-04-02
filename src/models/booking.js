@@ -3,6 +3,7 @@ const {
   Model
 } = require('sequelize');
 
+const Sequelize = require('sequelize');
 const { Enums } = require('../utils/common');
 const { PENDING, CANCELLED, INITIATED, BOOKED } = Enums.BOOKING_STATUS;
 
