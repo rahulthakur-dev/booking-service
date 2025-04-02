@@ -1,6 +1,7 @@
 const express = require('express');
 const { ServerConfig, logger } = require('./config');
 const apiRouter = require('./routes');
+const { CRONS } = require('./utils/common')
 
 const app = express();
 
@@ -11,4 +12,5 @@ app.use('/api', apiRouter);
 
 app.listen(ServerConfig.PORT, () => {
     logger.info(`Server is running on http://localhost:${ServerConfig.PORT}`);
+    CRONS();
 });
