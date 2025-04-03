@@ -23,13 +23,22 @@ async function createBooking(req,res){
     }
 }
 
+const inMemoryDB = {};
+
 async function makePayment(req, res) {
     try {
+        const idempotencyKey = req.headers['x-idempotency-key'];
+        if(!idempotencyKey || inMemoryDB[idempotencyKey]){
+            return res
+                .status(StatusCodes.BAD_REQUEST)
+                .json({ message: 'Idempotency key is required' });
+        }
         const response = await BookingService.makePayment({
             totalCost: req.body.totalCost,
             userId: req.body.userId,
             bookingId: req.body.bookingId
         });
+        inMemoryDB[idempotencyKey] = response;
         SuccessResponse.data = response;
         return res
             .status(StatusCodes.OK)
